@@ -53,20 +53,9 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
     /**
      * A playlist of videos displayed on the screen.
      */
-    // TODO: Replace the MutableLiveData and backing property below to a reference to the 'videos'
-    // TODO: from the VideosRepository
-    /**
-     * A playlist of videos that can be shown on the screen. This is private to avoid exposing a
-     * way to set this value to observers.
-     */
-    private val _playlist = MutableLiveData<List<DevByteVideo>>()
-
-    /**
-     * A playlist of videos that can be shown on the screen. Views should use this to get access
-     * to the data.
-     */
-    val playlist: LiveData<List<DevByteVideo>>
-        get() = _playlist
+    //  Replace the MutableLiveData and backing property below to a reference to the 'videos'
+    //  from the VideosRepository
+    private val playlist = videosRepository.videos
 
     /**
      * Event triggered for network error. This is private to avoid exposing a
