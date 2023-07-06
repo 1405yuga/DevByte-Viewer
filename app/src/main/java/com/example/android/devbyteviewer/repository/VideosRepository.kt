@@ -31,6 +31,7 @@ class VideosRepository(private  val database : VideosDatabase){
     //used to refesh offline cached data
     suspend fun refreshData(){
         withContext(Dispatchers.IO){
+            //get playlist through network
             val playlists = DevByteNetwork.devbytes.getPlaylist()
         }
 
