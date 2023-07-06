@@ -18,6 +18,7 @@ package com.example.android.devbyteviewer.repository
 
 import com.example.android.devbyteviewer.database.VideosDatabase
 import com.example.android.devbyteviewer.network.DevByteNetwork
+import com.example.android.devbyteviewer.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -33,6 +34,8 @@ class VideosRepository(private  val database : VideosDatabase){
         withContext(Dispatchers.IO){
             //get playlist through network
             val playlists = DevByteNetwork.devbytes.getPlaylist()
+            //store in db
+            database.videoDao.insertAll(playlists.asDatabaseModel())
         }
 
     }
