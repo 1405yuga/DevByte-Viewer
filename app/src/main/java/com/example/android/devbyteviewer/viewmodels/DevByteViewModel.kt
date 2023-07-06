@@ -17,15 +17,18 @@
 package com.example.android.devbyteviewer.viewmodels
 
 import android.app.Application
+import android.provider.MediaStore.Video
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.android.devbyteviewer.database.getDatabase
 import com.example.android.devbyteviewer.domain.DevByteVideo
 import com.example.android.devbyteviewer.network.DevByteNetwork
 import com.example.android.devbyteviewer.network.asDomainModel
+import com.example.android.devbyteviewer.repository.VideosRepository
 import kotlinx.coroutines.*
 import java.io.IOException
 
@@ -44,7 +47,8 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
     /**
      * The data source this ViewModel will fetch results from.
      */
-    // TODO: Add a reference to the VideosRepository class
+    //  Add a reference to the VideosRepository class
+    val videosRepository = VideosRepository(getDatabase(application))
 
     /**
      * A playlist of videos displayed on the screen.
