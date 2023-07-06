@@ -98,26 +98,27 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
      * init{} is called immediately when this ViewModel is created.
      */
     init {
-        // TODO: Replace with a call to the refreshDataFromRepository9) method
-        refreshDataFromNetwork()
+        //  Replace with a call to the refreshDataFromRepository9) method
+        refreshDataFromRepository()
     }
 
     /**
      * Refresh data from the repository. Use a coroutine launch to run in a
      * background thread.
      */
-    // TODO: Replace with the refreshDataFromRepository() method
-    private fun refreshDataFromNetwork() = viewModelScope.launch {
+    //  Replace with the refreshDataFromRepository() method
+    private fun refreshDataFromRepository() = viewModelScope.launch {
         try {
-            val playlist = DevByteNetwork.devbytes.getPlaylist()
-            _playlist.postValue(playlist.asDomainModel())
-
+            videosRepository.refreshData()
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
 
         } catch (networkError: IOException) {
             // Show a Toast error message and hide the progress bar.
-            _eventNetworkError.value = true
+            if(playlist.value.isNullOrEmpty()){
+                _eventNetworkError.value = true
+            }
+
         }
     }
 
